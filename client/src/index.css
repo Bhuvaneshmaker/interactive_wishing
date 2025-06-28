@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(271, 91%, 65%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Custom app colors */
+  --purple-50: hsl(270, 100%, 98%);
+  --purple-100: hsl(269, 100%, 95%);
+  --purple-600: hsl(271, 91%, 65%);
+  --purple-700: hsl(271, 81%, 56%);
+  --pink-50: hsl(327, 73%, 97%);
+  --pink-500: hsl(330, 81%, 60%);
+  --pink-600: hsl(333, 71%, 51%);
+  --green-50: hsl(138, 76%, 97%);
+  --green-500: hsl(142, 71%, 45%);
+  --green-600: hsl(142, 76%, 36%);
+  --blue-50: hsl(214, 100%, 97%);
+  --blue-600: hsl(221, 83%, 53%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(271, 91%, 65%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 text-foreground min-h-screen;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .calendar-day {
+    min-height: 60px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .nav-active {
+    border-bottom: 3px solid hsl(271, 91%, 65%);
+  }
+  
+  .page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
+  }
+  
+  .mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  .employee-avatar {
+    @apply w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm;
+    background: linear-gradient(135deg, hsl(271, 91%, 65%), hsl(330, 81%, 60%));
+  }
+
+  .celebration-card {
+    @apply bg-white bg-opacity-20 rounded-lg p-4;
+  }
+
+  .birthday-gradient {
+    background: linear-gradient(135deg, hsl(330, 81%, 60%), hsl(271, 91%, 65%));
+  }
+
+  .anniversary-gradient {
+    background: linear-gradient(135deg, hsl(142, 71%, 45%), hsl(221, 83%, 53%));
+  }
+}
+
+@layer utilities {
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bounce-slow {
+    0%, 20%, 53%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40%, 43% {
+      transform: translateY(-30px);
+    }
+    70% {
+      transform: translateY(-15px);
+    }
+    90% {
+      transform: translateY(-4px);
+    }
+  }
+  
+  .animate-bounce-slow {
+    animation: bounce-slow 2s infinite;
+  }
+
+  @media (max-width: 768px) {
+    .calendar-day {
+      min-height: 45px;
+      font-size: 14px;
+    }
+    
+    .calendar-grid {
+      gap: 0.25rem;
+    }
+  }
+}
